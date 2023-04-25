@@ -1,0 +1,133 @@
+---
+title: "Project"
+author: "Adam Budd"
+date: "2023-04-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+#Importing NBA Shot Data from 2004-2023
+```{r}
+nbashots <- read.csv('C:/Users/apbud/OneDrive/Desktop/Personal Projects/Shot Change Over Time/nbashots.csv')
+```
+
+#Organizing Data into 3 Basic Zones (3Pt, Mid Range, Paint)
+```{r}
+nbashots$BASIC_ZONE[nbashots$BASIC_ZONE == "Left Corner 3"] <- "3PT"
+nbashots$BASIC_ZONE[nbashots$BASIC_ZONE == "Right Corner 3"] <- "3PT"
+nbashots$BASIC_ZONE[nbashots$BASIC_ZONE == "Above the Break 3"] <- "3PT"
+
+nbashots$BASIC_ZONE[nbashots$BASIC_ZONE == "Restricted Area"] <- "Paint"
+nbashots$BASIC_ZONE[nbashots$BASIC_ZONE == "In The Paint (Non-RA)"] <- "Paint"
+
+colnames(nbashots)[colnames(nbashots) == "BASIC_ZONE"] ="ShotType"
+colnames(nbashots)[colnames(nbashots) == "SEASON_1"] ="Year"
+colnames(nbashots)[colnames(nbashots) == "SHOT_MADE"] ="MadeShot"
+```
+
+#Finding Shot Distribution for Each Year
+```{r}
+shots <- nbashots %>% select('ShotType', 'Year', 'MadeShot')
+
+tempshots <- shots %>% filter(Year == 2004)
+counts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2004))
+
+tempshots <- shots %>% filter(Year == 2005)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2005))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2006)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2006))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2007)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2007))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2008)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2008))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2009)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2009))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2010)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2010))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2011)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2011))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2012)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2012))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2013)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2013))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2014)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2014))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2015)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2015))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2016)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2016))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2017)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2017))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2018)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2018))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2019)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2019))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2020)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2020))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2021)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2021))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2022)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2022))
+counts <- rbind(counts, tempcounts)
+
+tempshots <- shots %>% filter(Year == 2023)
+tempcounts  <- tempshots %>% count(ShotType) %>% mutate(percent = n/sum(n) * 100) %>% mutate(Year = as.integer(2023))
+counts <- rbind(counts, tempcounts)
+
+counts <- counts %>% filter(ShotType != 'Backcourt')
+counts$percent <- round(counts$percent, digits = 1)
+```
+
+#Plotting the Data
+```{r}
+p <- ggplot(counts, aes(x = Year, y = percent, group = ShotType)) + geom_line(aes(color = ShotType), size = 1.5) + geom_point(aes(color = ShotType), size = 2.5) + ylab("Percentage of Total Shots Taken") + labs(title = "Change in Where Shots are Taken", subtitle = "2004 - 2023 Regular Seasons") + theme(plot.title = element_text(color = '#0E287D', size = 15, face = 'bold', hjust = 0.5), plot.subtitle = element_text(size = 10, face = 'bold', hjust = 0.5)) 
+
+ggsave("shotlocationchange.png")
+```
+
+
+
+
+
